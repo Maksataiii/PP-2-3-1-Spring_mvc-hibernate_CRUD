@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class UserServiceImp implements UserService{
     private UserDao userDao;
 
@@ -21,7 +21,6 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    @Transactional
     public List<User> getUsers() {
         return userDao.getUsers();
     }
@@ -45,7 +44,6 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    @Transactional
     public User show_user(int id) {
         return userDao.show_user(id);
     }
