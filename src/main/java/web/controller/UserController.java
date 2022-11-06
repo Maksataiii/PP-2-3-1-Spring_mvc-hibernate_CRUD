@@ -1,18 +1,22 @@
 package web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import web.model.User;
 import web.service.UserService;
-import web.service.UserServiceImp;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    private UserService userService;
-    @Autowired
+    private final UserService userService;
+
     public UserController(UserService userService){
         this.userService=userService;
     }
@@ -49,7 +53,7 @@ public class UserController {
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user,@PathVariable("id") int id){
-        userService.update(id,user);
+        userService.update(user);
         return "redirect:/users/";
     }
 
